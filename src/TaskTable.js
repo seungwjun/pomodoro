@@ -3,21 +3,6 @@ import { Table } from 'semantic-ui-react';
 import formatDate from 'dateformat';
 import NewTaskModal from './NewTaskModal';
 
-const TaskRow = (props) => {
-  const task = props.task;
-  return (
-    <Table.Row>
-      <Table.Cell>{task.get('taskName')}</Table.Cell>
-      <Table.Cell>{formatDate(task.get('startTime'), 'yyyy-mm-dd HH:MM')}</Table.Cell>
-      <Table.Cell>{formatDuration()}</Table.Cell>
-    </Table.Row>
-  );
-
-  function formatDuration() {
-    return task.get('remainingMinutes') + ' / ' + task.get('durationMinutes') + ' minutes';
-  }
-}
-
 const TaskTable = (props) => {
   return (
     <Table color='teal'>
@@ -33,6 +18,21 @@ const TaskTable = (props) => {
       </Table.Body>
     </Table>
   );
+}
+
+const TaskRow = (props) => {
+  const task = props.task;
+  return (
+    <Table.Row>
+      <Table.Cell>{task.get('taskName')}</Table.Cell>
+      <Table.Cell>{formatDate(task.get('startTime'), 'yyyy-mm-dd HH:MM')}</Table.Cell>
+      <Table.Cell>{formatDuration()}</Table.Cell>
+    </Table.Row>
+  );
+
+  function formatDuration() {
+    return task.get('remainingMinutes') + ' / ' + task.get('durationMinutes') + ' minutes';
+  }
 }
 
 export default TaskTable;
