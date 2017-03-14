@@ -106,13 +106,16 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return !is(this.props.taskHistory, nextProps.taskHistory);
+    const shouldUpdate = !is(this.props.taskHistory, nextProps.taskHistory);
+    if (shouldUpdate) {
+      storeIntoLocalStorage();
+      updateTitle(nextProps.taskHistory);
+    }
+    return shouldUpdate;
   }
 
   render() {
     console.log('App.render()');
-    // XXX Find a better place to persist localStorage
-    storeIntoLocalStorage();
     return (
       <Grid centered padded columns={1}>
         <Grid.Column>
@@ -121,6 +124,12 @@ class App extends Component {
       </Grid>
     );
   }
+}
+
+function updateTitle(taskHistory) {
+  const topTask = taskHistory.get(0);
+  if (!topTask) return;
+  document.title = topTask.get('remainingMinutes') + ' - Pomodoro';
 }
 
 export default App;
