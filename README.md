@@ -3,7 +3,7 @@
 - [DONE] Use localStorage
 - [DONE] Format times (YYYY-mm-dd hh:mm)
 - Bind key to "New Task"
-- Whistle or flash when task finishes
+- [DONE] Notify when task is finished
 - [DONE] Update title to show remaining time
 - Use Redux Provider-Container
 - Add "rate" (quality of pomodoro)

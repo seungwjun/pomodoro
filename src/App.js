@@ -4,8 +4,7 @@ import store, { storeIntoLocalStorage } from './store';
 import { startTask, updateCurrentTask } from './actions';
 import { is, fromJS } from 'immutable';
 import formatDate from 'dateformat';
-// import logo from './logo.svg';
-// import './App.css';
+import pomodoroPng from './pomodoro-done.png';
 
 // XXX For testing
 window.startTask = function(taskName, durationMinutes) {
@@ -34,7 +33,7 @@ const TaskTable = (props) => {
     <Table color='teal'>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Task&nbsp;&nbsp;<NewTask/></Table.HeaderCell>
+          <Table.HeaderCell>Task&nbsp;&nbsp;<NewTaskModal/></Table.HeaderCell>
           <Table.HeaderCell style={{width: '160px'}}>Started</Table.HeaderCell>
           <Table.HeaderCell style={{width: '160px'}}>Duration</Table.HeaderCell>
         </Table.Row>
@@ -46,7 +45,7 @@ const TaskTable = (props) => {
   );
 }
 
-class NewTask extends Component {
+class NewTaskModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -129,7 +128,16 @@ class App extends Component {
 function updateTitle(taskHistory) {
   const topTask = taskHistory.get(0);
   if (!topTask) return;
-  document.title = topTask.get('remainingMinutes') + ' - Pomodoro';
+  const remainingMinutes = topTask.get('remainingMinutes');
+  document.title = remainingMinutes + ' - Pomodoro';
+  if (remainingMinutes === 0) {
+    new Notification(topTask.get('taskName'), {
+      body: topTask.get('durationMinutes') + ' minutes have passed',
+      icon: pomodoroPng
+    });
+  }
 }
+
+Notification.requestPermission();
 
 export default App;
