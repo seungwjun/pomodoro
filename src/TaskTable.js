@@ -1,14 +1,15 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Icon } from 'semantic-ui-react';
 import formatDate from 'dateformat';
-import NewTaskModal from './NewTaskModal';
 
 const TaskTable = (props) => {
   return (
     <Table color='teal'>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Task&nbsp;&nbsp;<NewTaskModal/></Table.HeaderCell>
+          <Table.HeaderCell>Task&nbsp;&nbsp;
+            <Icon name='edit' onClick={props.openForm} color='teal' style={{cursor:'pointer'}}/>
+          </Table.HeaderCell>
           <Table.HeaderCell style={{width: '160px'}}>Started</Table.HeaderCell>
           <Table.HeaderCell style={{width: '160px'}}>Duration</Table.HeaderCell>
         </Table.Row>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Grid } from 'semantic-ui-react';
 import store, { storeIntoLocalStorage } from './store';
-import { updateCurrentTask } from './actions';
+import { updateCurrentTask, openNewTaskForm } from './actions';
 import TaskTable from './TaskTable';
 import { is, fromJS } from 'immutable';
 import pomodoroPng from './pomodoro-done.png';
+import NewTaskModal from './NewTaskModal';
 
 // XXX For testing
 window.store = store;
@@ -18,24 +19,30 @@ class App extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const shouldUpdate = !is(this.props.taskHistory, nextProps.taskHistory);
-    if (shouldUpdate) {
+    const taskHistoryChanged = !is(this.props.taskHistory, nextProps.taskHistory);
+    const formChanged = !is(this.props.newTaskForm, nextProps.newTaskForm);
+    if (taskHistoryChanged) {
       storeIntoLocalStorage();
       updateTitle(nextProps.taskHistory);
     }
-    return shouldUpdate;
+    return taskHistoryChanged || formChanged;
   }
 
   render() {
     console.log('App.render()');
     return (
       <Grid centered padded columns={1}>
+        <NewTaskModal {...this.props.newTaskForm.toJS()} />
         <Grid.Column>
-          <div className='column'><TaskTable history={this.props.taskHistory} /></div>
+          <div className='column'><TaskTable openForm={openForm} history={this.props.taskHistory} /></div>
         </Grid.Column>
       </Grid>
     );
   }
+}
+
+function openForm() {
+  store.dispatch(openNewTaskForm());
 }
 
 function updateTitle(taskHistory) {
