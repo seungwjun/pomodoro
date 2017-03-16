@@ -8,7 +8,7 @@ class NewTaskModal extends Component {
     return (
       <Modal open={this.props.shouldOpen}>
         <Modal.Content>
-          <Form onSubmit={this.submitTask.bind(this)} onKeyDown={this.processKeyDown.bind(this)}>
+          <Form onSubmit={this.submitTask.bind(this)} onKeyDown={this.handleKeyDown.bind(this)}>
             <Form.Field>
               <label>Task</label>
               <input autoFocus defaultValue={this.props.defaultTaskName} ref={(self) => this.taskNameInput = self} />
@@ -24,7 +24,7 @@ class NewTaskModal extends Component {
     );
   }
 
-  processKeyDown(ev) {
+  handleKeyDown(ev) {
     if (ev.keyCode === 27 /* ESC */) {
       store.dispatch(closeNewTaskForm());
     }
