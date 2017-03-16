@@ -10,8 +10,8 @@ const TaskTable = (props) => {
           <Table.HeaderCell>Task&nbsp;&nbsp;
             <Icon name='edit' title='New task (n)' onClick={props.openForm} color='teal' style={{cursor:'pointer'}}/>
           </Table.HeaderCell>
-          <Table.HeaderCell style={{width: '160px'}}>Started</Table.HeaderCell>
-          <Table.HeaderCell style={{width: '160px'}} className='right aligned'>Duration</Table.HeaderCell>
+          <Table.HeaderCell style={{width: '140px'}}>Started</Table.HeaderCell>
+          <Table.HeaderCell style={{width: '140px'}} className='right aligned'>Duration</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
