@@ -11,7 +11,7 @@ const TaskTable = (props) => {
             <Icon name='edit' title='New task (n)' onClick={props.openForm} color='teal' style={{cursor:'pointer'}}/>
           </Table.HeaderCell>
           <Table.HeaderCell style={{width: '160px'}}>Started</Table.HeaderCell>
-          <Table.HeaderCell style={{width: '160px'}}>Duration</Table.HeaderCell>
+          <Table.HeaderCell style={{width: '160px'}} className='right aligned'>Duration</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
@@ -27,7 +27,7 @@ const TaskRow = (props) => {
     <Table.Row>
       <Table.Cell>{task.get('taskName')}</Table.Cell>
       <Table.Cell>{formatDate(task.get('startTime'), 'yyyy-mm-dd HH:MM')}</Table.Cell>
-      <Table.Cell>{formatDuration()}</Table.Cell>
+      <Table.Cell className='right aligned'>{formatDuration()}</Table.Cell>
     </Table.Row>
   );
 
